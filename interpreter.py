@@ -23,10 +23,13 @@ for line in lines:
     program.append(operation)
     token += 1
 
-    if operation == "":
-
-        program.append()
+    if operation == "create":
+        filename = ' '.join(parts[1:])[1:-1]
+        program.append(filename)
         token += 1
+    
+    
+
 
 class Stack:
 
@@ -49,6 +52,13 @@ class Stack:
 count = 0
 stack = Stack(256)
 
-while program[count] != "HALT":
+while program[count] != "END":
     operation = program[count]
     count += 1
+
+    if operation == "create":
+        filename = program[count] + ".txt"
+        count += 1
+        with open(filename, 'w') as file:
+            pass
+        stack.pop()
