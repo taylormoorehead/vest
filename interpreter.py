@@ -27,3 +27,28 @@ for line in lines:
 
         program.append()
         token += 1
+
+class Stack:
+
+    def __init__(self, size):
+        self.buf = [0 for _ in range(size)]
+        self.sp = -1
+
+    def push(self, number):
+        self.sp += 1
+        self.buf[self.sp] = number
+
+    def pop(self):
+        number = self.buf[self.sp]
+        self.sp -= 1
+        return number
+
+    def top(self):
+        return self.buf[self.sp]
+
+count = 0
+stack = Stack(256)
+
+while program[count] != "HALT":
+    operation = program[count]
+    count += 1
