@@ -61,4 +61,26 @@ while program[count] != "END":
         count += 1
         with open(filename, 'w') as file:
             pass
-        stack.pop()
+
+    elif operation == "write":
+        if program[count] == "newline":
+            count += 2
+            filename = program[count]
+            with open(filename, 'w') as file:
+                file.write("\n")
+        else:
+            count += 2
+            filename = program[count]
+            with open(filename, "") as file:
+                file.write(stack.pop())
+        count += 1
+    
+    elif program[count + 1].split("(")[0] == "wacc":
+        e = float(program[count + 1].split("(")[1].split(", ")[0])
+        d = float(program[count + 1].split("(")[1].split(", ")[1])
+        re = float(program[count + 1].split("(")[1].split(", ")[2])
+        rd = float(program[count + 1].split("(")[1].split(", ")[3])
+        t = float(program[count + 1].split("(")[1].split(", ")[4].split(")")[0])
+        wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
+        stack.push(wacc)
+        count += 1
