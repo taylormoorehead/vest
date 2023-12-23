@@ -83,4 +83,8 @@ while program[count] != "END":
         t = float(program[count + 1].split("(")[1].split(", ")[4].split(")")[0])
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
         stack.push(wacc)
-        count += 1
+        count += 2
+    
+    elif operation == "for":
+        
+    
