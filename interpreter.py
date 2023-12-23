@@ -56,23 +56,12 @@ while program[count] != "END":
     operation = program[count]
     count += 1
 
-    if operation == "create":
-        filename = program[count] + ".txt"
-        count += 1
-        with open(filename, 'w') as file:
-            pass
-
-    elif operation == "write":
-        if program[count] == "newline":
-            count += 2
-            filename = program[count]
-            with open(filename, 'w') as file:
-                file.write("\n")
-        else:
-            count += 2
-            filename = program[count]
-            with open(filename, "") as file:
-                file.write(stack.pop())
+    if operation == "write":
+        count += 2
+        filename = program[count]
+        with open(filename, "w") as file:
+            file.write(stack.pop())
+            file.write("\n")
         count += 1
     
     elif program[count + 1].split("(")[0] == "wacc":
