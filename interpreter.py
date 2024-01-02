@@ -57,7 +57,7 @@ while program[count] != "END":
     count += 1
 
     if operation == "write":
-        count += 2
+        #count += 2
         filename = program[count]
         with open(filename, "w") as file:
             file.write(stack.pop())
