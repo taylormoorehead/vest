@@ -73,7 +73,3 @@ while program[count] != "END":
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
         stack.push(wacc)
         count += 2
-    
-    elif operation == "for":
-        
-    
