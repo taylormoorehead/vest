@@ -58,11 +58,12 @@ while program[count] != "END":
 
     if operation == "write":
         #count += 2
-        filename = program[count]
+        #filename = program[count]
+        filename = "file.txt"
         with open(filename, "w") as file:
-            file.write(stack.pop())
+            file.write(str(stack.pop()))
             file.write("\n")
-        count += 1
+        #count += 1
     
     elif program[count + 1].split("(")[0] == "wacc":
         e = float(program[count + 1].split("(")[1].split(", ")[0])
@@ -72,4 +73,4 @@ while program[count] != "END":
         t = float(program[count + 1].split("(")[1].split(", ")[4].split(")")[0])
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
         stack.push(wacc)
-        count += 2
+        #count += 2
