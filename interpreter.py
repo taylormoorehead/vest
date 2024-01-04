@@ -6,9 +6,10 @@ lines = []
 with open(path, "r") as file:
     lines = [line.strip() for line in file.readlines()]
 
-program = []
+program = {}
+code = []
 token = 0
-label = {}
+#label = {}
 for line in lines:
     parts = line.split(" ")
     operation = parts[0]
@@ -16,61 +17,50 @@ for line in lines:
     if operation == "":
         continue
 
-    if operation.endswith(":"):
-        label[operation[:-1]] = token
-        continue
+    # if operation.endswith(":"):
+    #     label[operation[:-1]] = token
+    #     continue
 
-    program.append(operation)
+    # program.append(operation)
+    # token += 1
+
+    code.append(operation)
     token += 1
 
-    if operation == "create":
-        filename = ' '.join(parts[1:])[1:-1]
-        program.append(filename)
+    if operation == "write":
+        filename = parts[3]
+        program["filename"] = filename
         token += 1
-    
-    
 
-
-class Stack:
-
-    def __init__(self, size):
-        self.buf = [0 for _ in range(size)]
-        self.sp = -1
-
-    def push(self, number):
-        self.sp += 1
-        self.buf[self.sp] = number
-
-    def pop(self):
-        number = self.buf[self.sp]
-        self.sp -= 1
-        return number
-
-    def top(self):
-        return self.buf[self.sp]
+    if len(parts) > 2 and parts[2].__contains__("wacc("):
+        e = float(parts[2].split("wacc(")[1].split(",")[0])
+        d = float(parts[3].split(",")[0])
+        re = float(parts[4].split(",")[0])
+        rd = float(parts[5].split(",")[0])
+        t = float(parts[6].split(")")[0])
+        program["e"] = e
+        program["d"] = d
+        program["re"] = re
+        program["rd"] = rd
+        program["t"] = t
 
 count = 0
-stack = Stack(256)
-
-while program[count] != "END":
-    operation = program[count]
+while code[count] != "END":
+    operation = code[count]
     count += 1
 
     if operation == "write":
-        #count += 2
-        #filename = program[count]
-        filename = "file.txt"
+        filename = program.get("filename")
         with open(filename, "w") as file:
-            file.write(str(stack.pop()))
+            file.write(str(program.get("wacc")))
             file.write("\n")
-        #count += 1
     
-    elif program[count + 1].split("(")[0] == "wacc":
-        e = float(program[count + 1].split("(")[1].split(", ")[0])
-        d = float(program[count + 1].split("(")[1].split(", ")[1])
-        re = float(program[count + 1].split("(")[1].split(", ")[2])
-        rd = float(program[count + 1].split("(")[1].split(", ")[3])
-        t = float(program[count + 1].split("(")[1].split(", ")[4].split(")")[0])
+    elif operation == "company_wacc":
+        e = program.get("e")
+        d = program.get("d")
+        re = program.get("re")
+        rd = program.get("rd")
+        t = program.get("t")
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
-        stack.push(wacc)
-        #count += 2
+        program["wacc"] = wacc
+
