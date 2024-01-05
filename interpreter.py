@@ -1,4 +1,5 @@
 import sys
+import turtle
 
 path = sys.argv[1]
 
@@ -43,6 +44,22 @@ for line in lines:
         program["re"] = re
         program["rd"] = rd
         program["t"] = t
+    
+    if operation == "graph":
+        token += 1
+
+
+def setup_coordinates():
+    graph.speed(0)
+    graph.penup()
+    graph.goto(-150, -150)
+    graph.pendown()
+    graph.forward(300)
+    graph.backward(300)
+    graph.left(90)
+    graph.forward(300)
+    graph.backward(300)
+    graph.right(90)
 
 count = 0
 while code[count] != "END":
@@ -63,4 +80,14 @@ while code[count] != "END":
         t = program.get("t")
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
         program["wacc"] = wacc
+    
+    elif operation == "graph":
+        print("graph function")
+        graph = turtle.Turtle()
+        setup_coordinates()
+        graph.penup()
+        graph.hideturtle()
+        screen = turtle.Screen()
+        screen.title("Graph")
+        screen.exitonclick()
 
