@@ -31,6 +31,15 @@ graph.forward(300)
 graph.backward(300)
 graph.right(90)
 graph.penup()
+
+data_points = [(1, 2), (7, 3), (12, 2.75)]
+for x, y in data_points:
+    print("plotting point")
+    scaled_x = x - 150
+    scaled_y = y - 150
+    graph.goto(scaled_x, scaled_y)
+    graph.dot(2.5)
+
 graph.hideturtle()
 screen = turtle.Screen()
 screen.title("Graph")
