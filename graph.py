@@ -37,10 +37,10 @@ plot_best_fit_line(m, b)
 
 graph.penup()
 for x, y in data_points:
-    scaled_x = x * 20
-    scaled_y = y * 20
+    scaled_x = x - 150
+    scaled_y = y - 150
     graph.goto(scaled_x, scaled_y)
-    graph.dot(10)
+    graph.dot(2.5)
 
 graph.hideturtle()
 

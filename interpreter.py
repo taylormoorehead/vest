@@ -48,7 +48,6 @@ for line in lines:
         token += 1
     
     if operation == "graph":
-        print(parts[1])
         graphname = parts[1]
         program["graphname"] = graphname
         token += 1
@@ -65,6 +64,8 @@ def setup_coordinates():
     graph.forward(300)
     graph.backward(300)
     graph.right(90)
+
+data_points = [(1, 2), (7, 3), (12, 2.75)]
 
 count = 0
 while code[count] != "END":
@@ -89,6 +90,14 @@ while code[count] != "END":
         graph = turtle.Turtle()
         setup_coordinates()
         graph.penup()
+
+        for x, y in data_points:
+            print("plotting point")
+            scaled_x = x - 150
+            scaled_y = y - 150
+            graph.goto(scaled_x, scaled_y)
+            graph.dot(2.5)
+
         graph.hideturtle()
         screen = turtle.Screen()
         screen.title(program.get("graphname"))
