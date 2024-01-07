@@ -1,5 +1,6 @@
 import sys
 import turtle
+import csv
 
 path = sys.argv[1]
 
@@ -33,19 +34,23 @@ for line in lines:
         program["filename"] = filename
         token += 1
 
-    if len(parts) > 2 and parts[2].__contains__("wacc("):
-        e = float(parts[2].split("wacc(")[1].split(",")[0])
-        d = float(parts[3].split(",")[0])
-        re = float(parts[4].split(",")[0])
-        rd = float(parts[5].split(",")[0])
-        t = float(parts[6].split(")")[0])
+    if operation == "wacc":
+        e = float(parts[3].split(",")[0])
+        d = float(parts[4].split(",")[0])
+        re = float(parts[5].split(",")[0])
+        rd = float(parts[6].split(",")[0])
+        t = float(parts[7].split(")")[0])
         program["e"] = e
         program["d"] = d
         program["re"] = re
         program["rd"] = rd
         program["t"] = t
+        token += 1
     
     if operation == "graph":
+        print(parts[1])
+        graphname = parts[1]
+        program["graphname"] = graphname
         token += 1
 
 
@@ -67,12 +72,11 @@ while code[count] != "END":
     count += 1
 
     if operation == "write":
-        filename = program.get("filename")
-        with open(filename, "w") as file:
+        with open(program.get("filename"), "w") as file:
             file.write(str(program.get("wacc")))
             file.write("\n")
     
-    elif operation == "company_wacc":
+    elif operation == "wacc":
         e = program.get("e")
         d = program.get("d")
         re = program.get("re")
@@ -82,12 +86,11 @@ while code[count] != "END":
         program["wacc"] = wacc
     
     elif operation == "graph":
-        print("graph function")
         graph = turtle.Turtle()
         setup_coordinates()
         graph.penup()
         graph.hideturtle()
         screen = turtle.Screen()
-        screen.title("Graph")
+        screen.title(program.get("graphname"))
         screen.exitonclick()
 
