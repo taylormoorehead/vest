@@ -12,6 +12,8 @@ program = {}
 code = []
 token = 0
 #label = {}
+comments = []
+
 for line in lines:
     parts = line.split(" ")
     operation = parts[0]
@@ -51,6 +53,9 @@ for line in lines:
         graphname = parts[1]
         program["graphname"] = graphname
         token += 1
+
+    if operation.__contains__("//"):
+        comments.append(operation)
 
 
 def setup_coordinates():
@@ -92,7 +97,6 @@ while code[count] != "END":
         graph.penup()
 
         for x, y in data_points:
-            print("plotting point")
             scaled_x = x - 150
             scaled_y = y - 150
             graph.goto(scaled_x, scaled_y)
@@ -102,4 +106,8 @@ while code[count] != "END":
         screen = turtle.Screen()
         screen.title(program.get("graphname"))
         screen.exitonclick()
+    
+    elif comments.__contains__(operation):
+        continue
 
+print("Program finished.")
