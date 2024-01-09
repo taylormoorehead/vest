@@ -18,7 +18,7 @@ for line in lines:
     parts = line.split(" ")
     operation = parts[0]
 
-    if operation == "":
+    if operation == "" or operation.__contains__("//"):
         continue
 
     # if operation.endswith(":"):
@@ -50,8 +50,10 @@ for line in lines:
         token += 1
     
     if operation == "graph":
-        graphname = parts[1]
-        program["graphname"] = graphname
+        while not parts[1].__contains__("//"):
+            graphname = parts[1]
+            program["graphname"] = graphname
+            break
         token += 1
 
     if operation.__contains__("//"):
