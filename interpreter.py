@@ -10,8 +10,6 @@ with open(path, "r") as file:
 
 program = {}
 code = []
-token = 0
-#label = {}
 comments = []
 
 for line in lines:
@@ -29,12 +27,10 @@ for line in lines:
     # token += 1
 
     code.append(operation)
-    token += 1
 
     if operation == "write":
         filename = parts[3]
         program["filename"] = filename
-        token += 1
 
     if operation == "wacc":
         e = float(parts[3].split(",")[0])
@@ -47,14 +43,12 @@ for line in lines:
         program["re"] = re
         program["rd"] = rd
         program["t"] = t
-        token += 1
     
     if operation == "graph":
         while not parts[1].__contains__("//"):
             graphname = parts[1]
             program["graphname"] = graphname
             break
-        token += 1
 
     if operation.__contains__("//"):
         comments.append(operation)
