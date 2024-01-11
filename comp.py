@@ -41,7 +41,7 @@ for x, y in data_points:
     graph.dot(2.5)
 
 graph.hideturtle()
-screen = turtle.Screen()
+screen = turtle.Screen() #test
 screen.title("Graph")
 screen.exitonclick()
 

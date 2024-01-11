@@ -68,6 +68,11 @@ def setup_coordinates():
 
 data_points = [(1, 2), (7, 3), (12, 2.75)]
 
+with open(path, "r") as file:
+    csv_reader = csv.reader(file)
+    for row in csv_reader:
+        data_points.append((float(row[0]), float(row[1])))
+
 count = 0
 while code[count] != "END":
     operation = code[count]
