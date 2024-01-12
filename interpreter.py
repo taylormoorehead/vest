@@ -45,10 +45,11 @@ for line in lines:
         program["t"] = t
     
     if operation == "graph":
-        while not parts[1].__contains__("//"):
-            graphname = parts[1]
-            program["graphname"] = graphname
-            break
+        for i in range(parts.__len__()):
+            while not parts[i].__contains__("//"):
+                graphname = parts[i]
+                program["graphname"] = graphname
+                break
 
     if operation.__contains__("//"):
         comments.append(operation)
@@ -68,10 +69,10 @@ def setup_coordinates():
 
 data_points = [(1, 2), (7, 3), (12, 2.75)]
 
-with open(path, "r") as file:
-    csv_reader = csv.reader(file)
-    for row in csv_reader:
-        data_points.append((float(row[0]), float(row[1])))
+# with open(path, "r") as file:
+#     csv_reader = csv.reader(file)
+#     for row in csv_reader:
+#         data_points.append((float(row[0]), float(row[1])))
 
 count = 0
 while code[count] != "END":
