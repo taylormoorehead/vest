@@ -29,7 +29,14 @@ for line in lines:
     code.append(operation)
 
     if operation == "write":
-        filename = parts[3]
+        i = 2
+        while i < parts.__len__():
+            while not parts[i].__contains__("//"):
+                graphname = parts[i]
+                program["graphname"] = graphname
+                break
+            i += 1
+        filename = parts[i - 1]
         program["filename"] = filename
 
     if operation == "wacc":
