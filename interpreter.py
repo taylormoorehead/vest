@@ -110,6 +110,10 @@ while code[count] != "END":
             scaled_y = y - 150
             graph.goto(scaled_x, scaled_y)
             graph.dot(2.5)
+        
+        graph.goto(-150, -150)
+        graph.pendown()
+        graph.goto(-150 + 12, -150 + 2.964)
 
         graph.hideturtle()
         screen = turtle.Screen()
