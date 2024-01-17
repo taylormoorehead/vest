@@ -61,6 +61,7 @@ for line in lines:
     if operation.__contains__("//"):
         comments.append(operation)
 
+vis_graph = False
 
 def setup_coordinates():
     graph.speed(0)
@@ -73,6 +74,7 @@ def setup_coordinates():
     graph.forward(300)
     graph.backward(300)
     graph.right(90)
+    vis_graph = True
 
 data_points = [(1, 2), (7, 3), (12, 2.75)]
 
@@ -111,7 +113,7 @@ while code[count] != "END":
     
     elif operation == "graph":
         graph = turtle.Turtle()
-        setup_coordinates()
+        if not vis_graph: setup_coordinates()
         graph.penup()
 
         for x, y in data_points:
