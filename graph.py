@@ -11,6 +11,8 @@ sum_x_squared = sum([x ** 2 for x, y in data_points])
 m = (n * sum_xy - sum_x * sum_y) / (n * sum_x_squared - sum_x ** 2)
 b = (sum_y - m * sum_x) / n
 
+print(m, b)
+
 graph = turtle.Turtle()
 
 def setup_coordinates():

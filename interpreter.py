@@ -76,6 +76,15 @@ def setup_coordinates():
 
 data_points = [(1, 2), (7, 3), (12, 2.75)]
 
+n = len(data_points)
+sum_x = sum([x for x, y in data_points])
+sum_y = sum([y for x, y in data_points])
+sum_xy = sum([x * y for x, y in data_points])
+sum_x_squared = sum([x ** 2 for x, y in data_points])
+
+m = (n * sum_xy - sum_x * sum_y) / (n * sum_x_squared - sum_x ** 2)
+b = (sum_y - m * sum_x) / n
+
 # with open(path, "r") as file:
 #     csv_reader = csv.reader(file)
 #     for row in csv_reader:
@@ -111,9 +120,12 @@ while code[count] != "END":
             graph.goto(scaled_x, scaled_y)
             graph.dot(2.5)
         
+        line_end = m * 12 + b
+        print(line_end)
+        
         graph.goto(-150, -150)
         graph.pendown()
-        graph.goto(-150 + 12, -150 + 2.964)
+        graph.goto(-150 + 12, -150 + line_end)
 
         graph.hideturtle()
         screen = turtle.Screen()
