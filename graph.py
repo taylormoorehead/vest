@@ -33,7 +33,7 @@ def plot_best_fit_line(m, b):
 
 setup_coordinates()
 
-plot_best_fit_line(m, b)
+# plot_best_fit_line(m, b)
 
 graph.penup()
 for x, y in data_points:
@@ -41,6 +41,10 @@ for x, y in data_points:
     scaled_y = y - 150
     graph.goto(scaled_x, scaled_y)
     graph.dot(2.5)
+
+graph.goto(-150, -150)
+graph.pendown()
+graph.goto(-150 + 12, -150 + 2.964)
 
 graph.hideturtle()
 
