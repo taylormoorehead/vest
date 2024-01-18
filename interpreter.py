@@ -76,7 +76,16 @@ def setup_coordinates():
     graph.right(90)
     vis_graph = True
 
-data_points = [(1, 2), (7, 3), (12, 2.75)]
+data_points = []
+index = 0
+
+with open(graphname, "r", encoding="utf-8-sig") as file:
+    csv_reader = csv.reader(file)
+    for row in csv_reader:
+        print(row[0], row[1])
+        data_points.append(())
+        data_points[index] = (float(row[0]), float(row[1]))
+        index += 1
 
 n = len(data_points)
 sum_x = sum([x for x, y in data_points])
@@ -86,11 +95,6 @@ sum_x_squared = sum([x ** 2 for x, y in data_points])
 
 m = (n * sum_xy - sum_x * sum_y) / (n * sum_x_squared - sum_x ** 2)
 b = (sum_y - m * sum_x) / n
-
-# with open(path, "r") as file:
-#     csv_reader = csv.reader(file)
-#     for row in csv_reader:
-#         data_points.append((float(row[0]), float(row[1])))
 
 count = 0
 while code[count] != "END":
