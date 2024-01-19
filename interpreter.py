@@ -136,7 +136,13 @@ while code[count] != "END":
         graph.hideturtle()
         screen = turtle.Screen()
         screen.title(program.get("graphname"))
-        screen.exitonclick()
+        turtle.penup()
+        graph.hideturtle()
+        turtle.goto(0, 200)
+        graph.hideturtle()
+        turtle.write(program.get("graphname"), font=("Arial", 24, "normal"), align="center")
+        graph.hideturtle()
+        turtle.done()
     
     elif comments.__contains__(operation):
         continue
