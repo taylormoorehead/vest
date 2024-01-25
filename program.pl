@@ -1,4 +1,4 @@
-wacc company_wacc = 1, 1, 1, 1, 0.5
-write company_wacc in file.txt
+future_value fv = 15, 0.05, 3
+write fv in file.txt
 graph data.csv
 END

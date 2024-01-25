@@ -11,6 +11,7 @@ with open(path, "r") as file:
 program = {}
 code = []
 comments = []
+parts = []
 
 for line in lines:
     parts = line.split(" ")
@@ -23,7 +24,7 @@ for line in lines:
     #     label[operation[:-1]] = token
     #     continue
 
-    # program.append(operation)
+    program[operation] = line
     # token += 1
 
     code.append(operation)
@@ -50,6 +51,16 @@ for line in lines:
         program["re"] = re
         program["rd"] = rd
         program["t"] = t
+    
+    if operation == "future_value":
+        pv = float(parts[3].split(",")[0])
+        r = float(parts[4].split(",")[0])
+        n = float(parts[5].split(",")[0])
+        var = parts[1]
+        program["presentvalue"] = pv
+        program["rate"] = r
+        program["time"] = n
+        program[var] = var
     
     if operation == "graph":
         for i in range(parts.__len__()):
@@ -103,17 +114,24 @@ while code[count] != "END":
 
     if operation == "write":
         with open(program.get("filename"), "w") as file:
-            file.write(str(program.get("wacc")))
+            file.write(str(program[program.get(operation).split(" ")[1]]))
             file.write("\n")
     
     elif operation == "wacc":
-        e = program.get("e")
-        d = program.get("d")
-        re = program.get("re")
-        rd = program.get("rd")
-        t = program.get("t")
+        e = program.get("equity")
+        d = program.get("debt")
+        re = program.get("equityrate")
+        rd = program.get("debtrate")
+        t = program.get("tax")
         wacc = (e / (d + e)) * re + (d / (d + e)) * rd * (1 - t)
         program["wacc"] = wacc
+    
+    elif operation == "future_value":
+        pv = program.get("presentvalue")
+        r = program.get("rate")
+        n = program.get("time")
+        future_value = pv * (1 + r) ** n
+        program[var] = future_value
     
     elif operation == "graph":
         graph = turtle.Turtle()
