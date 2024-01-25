@@ -82,7 +82,7 @@ index = 0
 with open(graphname, "r", encoding="utf-8-sig") as file:
     csv_reader = csv.reader(file)
     for row in csv_reader:
-        print(row[0], row[1])
+        # print(row[0], row[1])
         data_points.append(())
         data_points[index] = (float(row[0]), float(row[1]))
         index += 1

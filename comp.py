@@ -1,4 +1,4 @@
-# import csv
+import csv
 # filename = "file.txt"
 # with open(filename, 'w') as file:
 #     pass
@@ -32,7 +32,17 @@ graph.backward(300)
 graph.right(90)
 graph.penup()
 
-data_points = [(1, 2), (7, 3), (12, 2.75)]
+data_points = []
+index = 0
+
+with open("data.csv", "r", encoding="utf-8-sig") as file:
+    csv_reader = csv.reader(file)
+    for row in csv_reader:
+        print(row[0], row[1])
+        data_points.append(())
+        data_points[index] = (float(row[0]), float(row[1]))
+        index += 1
+    
 for x, y in data_points:
     print("plotting point")
     scaled_x = x - 150
