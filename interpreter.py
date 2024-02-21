@@ -46,11 +46,11 @@ for line in lines:
         re = float(parts[5].split(",")[0])
         rd = float(parts[6].split(",")[0])
         t = float(parts[7].split(")")[0])
-        program["e"] = e
-        program["d"] = d
-        program["re"] = re
-        program["rd"] = rd
-        program["t"] = t
+        program["equity"] = e
+        program["debt"] = d
+        program["equityrate"] = re
+        program["debtrate"] = rd
+        program["tax"] = t
     
     if operation == "future_value":
         pv = float(parts[3].split(",")[0])
@@ -114,7 +114,7 @@ while code[count] != "END":
 
     if operation == "write":
         with open(program.get("filename"), "w") as file:
-            file.write(str(program[program.get(operation).split(" ")[1]]))
+            file.write(str(program["wacc"]))
             file.write("\n")
     
     elif operation == "wacc":
