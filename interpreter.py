@@ -61,6 +61,16 @@ for line in lines:
         program["rate"] = r
         program["time"] = n
         program[var] = var
+
+    if operation == "present_value":
+        fv = float(parts[3].split(",")[0])
+        r = float(parts[4].split(",")[0])
+        n = float(parts[5].split(",")[0])
+        var = parts[1]
+        program["futurevalue"] = fv
+        program["rate_p"] = r
+        program["time_p"] = n
+        program[var] = var
     
     if operation == "graph":
         for i in range(parts.__len__()):
@@ -131,6 +141,13 @@ while code[count] != "END":
         r = program.get("rate")
         n = program.get("time")
         future_value = pv * (1 + r) ** n
+        program[var] = future_value
+
+    elif operation == "present_value":
+        fv = program.get("futurevalue")
+        r = program.get("rate_p")
+        n = program.get("time_p")
+        present_value = fv * (1 / (1 + r) ** n)
         program[var] = future_value
     
     elif operation == "graph":
